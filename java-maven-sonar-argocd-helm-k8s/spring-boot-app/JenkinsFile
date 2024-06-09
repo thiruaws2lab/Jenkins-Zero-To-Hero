@@ -48,7 +48,7 @@ pipeline {
     }
 
 
- stages {
+ 
         stage('Build image') {
                 environment {
         DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:${BUILD_NUMBER}"
@@ -64,7 +64,7 @@ pipeline {
                 }
             }
         }
-    }
+    
     stage('Update Deployment File') {
         environment {
             GIT_REPO_NAME = "Jenkins-Zero-To-Hero"
