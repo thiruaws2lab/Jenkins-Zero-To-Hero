@@ -49,21 +49,7 @@ pipeline {
 
 
  
-        stage('Build image') {
-                environment {
-        DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:${BUILD_NUMBER}"
-        // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
-        REGISTRY_CREDENTIALS = credentials('docker-cred')
-      }
-            steps {
-                echo 'Starting to build docker image'
-
-                script {
-                    def customImage = docker.build("${DOCKER_IMAGE}")
-                    customImage.push()
-                }
-            }
-        }
+        
     
     stage('Update Deployment File') {
         environment {
