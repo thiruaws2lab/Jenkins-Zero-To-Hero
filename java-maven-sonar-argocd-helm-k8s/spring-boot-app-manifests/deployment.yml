@@ -19,3 +19,4 @@ spec:
         image: thiruaws2lab/ultimate-cicd:replaceImageTag
         ports:
         - containerPort: 8080
+        
