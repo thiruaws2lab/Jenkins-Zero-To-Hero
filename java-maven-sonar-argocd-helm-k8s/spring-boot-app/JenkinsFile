@@ -38,7 +38,7 @@ pipeline {
       steps {
         echo 'Starting to build docker image'
         sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
-        withDockerRegistry([ credentialsId: "docker-cred", url: "" ])
+        import org.jenkinsci.plugins.docker.commons.credentials.DockerRegistryToken
         script {
            
           def customImage = docker.image("${DOCKER_IMAGE}")
