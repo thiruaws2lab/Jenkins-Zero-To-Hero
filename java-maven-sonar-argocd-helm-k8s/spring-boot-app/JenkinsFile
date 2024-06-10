@@ -3,8 +3,8 @@ pipeline {
     maven 'mvn'
     jdk 'jdk'
     ant 'ant'
-    synk 'synk'
-    trivy 'trivy'
+ dependency-check 'DP'
+
   }
   agent {
     docker {
