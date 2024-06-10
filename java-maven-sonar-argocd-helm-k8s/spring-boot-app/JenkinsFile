@@ -42,14 +42,16 @@ pipeline {
       steps {
  
         echo 'Starting to build docker image'
-       // sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
+        sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
         
         script {
 
-            sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app'
-            sh 'docker build -t ${DOCKER_IMAGE} .'
+
             // sh 'docker login -u thiruaws2lab -p dckr_pat_pPpigbKyOKCjRTbqsfLRKJ8mTA8'
             withDockerRegistry([ credentialsId: "docker-cred", url: "" ]) 
+                def customImage = docker.image("${DOCKER_IMAGE}")
+                    customImage.push()
+                
       // following commands will be executed within logged docker registry
             sh 'docker push ${DOCKER_IMAGE}'
 
