@@ -44,13 +44,22 @@ pipeline {
         // withDockerRegistry([ credentialsId: "docker-cred", url: "" ])
 
         echo 'Starting to build docker image'
-        sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
+       // sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
         
         script {
-          docker.withRegistry(DOCKER_REGISTRY_URL, REGISTRY_CREDENTIALS)  {
-          def customImage = docker.image("${DOCKER_IMAGE}")
-          customImage.push()
-          }
+
+            sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
+            def dockerImage = docker.image("${DOCKER_IMAGE}")
+            dockerImage.inside("--entrypoint=''") {
+                sh 'echo "Hello from inside the container"'
+            }
+            withdockerRegistry([credentialsId: 'docker-cred', url: '']) {
+                dockerImage.push()
+            }
+            dockerImage.push()
+
+          
+         
         }
       }
     }
