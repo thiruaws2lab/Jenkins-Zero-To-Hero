@@ -29,6 +29,23 @@ pipeline {
         }
       }
     }
+
+        stage("OWASP Dependency Check"){
+            steps{
+                dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'DP'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+
+
+
+        stage("TRIVY"){
+            steps{
+                sh " trivy image ${DOCKER_IMAGE} "
+            }
+        }
+
+
     stage('Build /Push image') {
       
         
