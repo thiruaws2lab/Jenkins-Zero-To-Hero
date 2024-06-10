@@ -71,35 +71,7 @@ pipeline {
     }
 
 
- 
-     stage('Grype scan') {
-      steps {
-       grypeScan scanDest: 'dir:/var/lib/jenkins/workspace/demo1/java-maven-sonar-argocd-helm-k8s', repName: 'myScanResult.txt', autoInstall:true
-      }
-    }
-  }
-stage('Grype scan output') {
-post {
-    always {
-        recordIssues(
-          tools: [grype()],
-          aggregatingResults: true,
-          failedNewAll: 1, //fail if >=1 new issues
-          failedTotalHigh: 20, //fail if >=20 HIGHs
-          failedTotalAll : 100, //fail if >=100 issues in total
-          filters: [
-            excludeType('CVE-2023-2976'),
-            excludeType('CVE-2012-17488'),
-          ],
-          //failOnError: true
-        )
-    }
-  }
-
-
-
-
-    stage('Scan') {
+     stage('Scan') {
                         environment {
         
         DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:latest"
