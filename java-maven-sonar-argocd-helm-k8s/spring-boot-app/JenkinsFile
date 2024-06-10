@@ -128,4 +128,4 @@ snykSecurity failOnError: false, organisation: 'thiruaws2lab', projectName: 'thi
             }
         }
     }
-  }}
+  }
