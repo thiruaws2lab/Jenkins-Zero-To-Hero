@@ -39,8 +39,8 @@ pipeline {
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
-         //withDockerRegistry(credentialsId: dockerHubRegistryCredential, url: '')
-         withDockerRegistry([ credentialsId: "docker-cred", url: "" ])
+         withDockerRegistry(credentialsId: docker-cred, url: '')
+        // withDockerRegistry([ credentialsId: "docker-cred", url: "" ])
 
         echo 'Starting to build docker image'
         sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
