@@ -42,7 +42,7 @@ pipeline {
         script {
            
           def customImage = docker.image("${DOCKER_IMAGE}")
-          withDockerRegistry([ credentialsId: "docker-cred", url: "https://index.docker.io/v1/" ])
+          withDockerRegistry([ credentialsId: "docker-cred", url: "" ])
           customImage.push()
         }
       }
