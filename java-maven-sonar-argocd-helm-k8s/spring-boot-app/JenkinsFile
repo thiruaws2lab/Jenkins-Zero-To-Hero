@@ -47,8 +47,8 @@ pipeline {
         script {
 
 
-            // sh 'docker login -u thiruaws2lab -p dckr_pat_pPpigbKyOKCjRTbqsfLRKJ8mTA8'
-            withDockerRegistry([ credentialsId: "docker-cred", url: "" ]) 
+            sh 'docker login -u thiruaws2lab -p dckr_pat_pPpigbKyOKCjRTbqsfLRKJ8mTA8'
+            //withDockerRegistry([ credentialsId: "docker-cred", url: "" ]) 
                 def customImage = docker.image("${DOCKER_IMAGE}")
                     customImage.push()
                 
