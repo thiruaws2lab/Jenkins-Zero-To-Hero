@@ -82,7 +82,7 @@ pipeline {
         //DOCKER_REGISTRY_URL = "https://index.docker.io/v1/"
       }
       steps {
-        snykSecurity organisation: 'thiruaws2lab', projectName: 'ultimate-cicd',  snykInstallation: 'Snyk', snykTokenId: 'synk-api', targetFile: 'package.html'
+        snykSecurity organisation: 'thiruaws2lab', projectName: 'ultimate-cicd',  snykInstallation: 'snyk', snykTokenId: 'synk-api', targetFile: 'package.html'
     }
     }
 
