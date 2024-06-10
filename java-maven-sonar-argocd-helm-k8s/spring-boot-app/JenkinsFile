@@ -65,7 +65,8 @@ pipeline {
       // following commands will be executed within logged docker registry
             sh 'docker push ${DOCKER_IMAGE}'
 
-      
+                      sh '/usr/local/bin/trivy --version'
+                sh '/usr/local/bin/trivy image ${DOCKER_IMAGE}'
         }
       }
     }
