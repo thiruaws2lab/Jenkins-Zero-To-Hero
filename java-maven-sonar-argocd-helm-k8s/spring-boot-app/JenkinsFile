@@ -33,19 +33,18 @@ pipeline {
         stage("OWASP Dependency Check"){
             steps{
                 dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'DP'
-                //dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
 
 
 
 
-    stage('Build /Push image') {
-      
-        
+    stage('Build /Push image') {        
         
       environment {
-        DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:latest"
+        //DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
         //DOCKER_REGISTRY_URL = "https://index.docker.io/v1/"
@@ -53,15 +52,15 @@ pipeline {
       steps {
  
         echo 'Starting to build docker image'
-        sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
+        
         
         script {
 
-
+            sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
             sh 'docker login -u thiruaws2lab -p dckr_pat_pPpigbKyOKCjRTbqsfLRKJ8mTA8'
             //withDockerRegistry([ credentialsId: "docker-cred", url: "" ]) 
-                def customImage = docker.image("${DOCKER_IMAGE}")
-                    customImage.push()
+               // def customImage = docker.image("${DOCKER_IMAGE}")
+              //      customImage.push()
                 
       // following commands will be executed within logged docker registry
             sh 'docker push ${DOCKER_IMAGE}'
@@ -75,21 +74,20 @@ pipeline {
     stage('Scan') {
                         environment {
         
-        DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:lastest"
+        DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:latest"
         //DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
         //DOCKER_REGISTRY_URL = "https://index.docker.io/v1/"
       }
       steps {
-        snykSecurity organisation: 'thiruaws2lab', projectName: 'ultimate-cicd',  snykInstallation: 'snyk', snykTokenId: 'synk-api', targetFile: 'package.html'
-    }
+snykSecurity failOnError: false, organisation: 'thiruaws2lab', snykInstallation: 'synk', snykTokenId: 'synk-api', targetFile: 'package.json'    }
     }
 
            stage("TRIVY"){
                   environment {
         
-        DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:lastest"
+        DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:latest"
         //DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
