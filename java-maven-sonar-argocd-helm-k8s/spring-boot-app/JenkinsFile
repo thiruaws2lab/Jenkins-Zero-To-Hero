@@ -79,7 +79,7 @@ pipeline {
         //DOCKER_REGISTRY_URL = "https://index.docker.io/v1/"
       }
             steps{
-                sh " trivy image ${DOCKER_IMAGE} "
+                sh 'trivy image ${DOCKER_IMAGE}'
             }
         }
  
