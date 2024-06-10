@@ -39,12 +39,6 @@ pipeline {
 
 
 
-        stage("TRIVY"){
-            steps{
-                sh " trivy image ${DOCKER_IMAGE} "
-            }
-        }
-
 
     stage('Build /Push image') {
       
@@ -77,7 +71,11 @@ pipeline {
       }
     }
 
-
+           stage("TRIVY"){
+            steps{
+                sh " trivy image ${DOCKER_IMAGE} "
+            }
+        }
  
         
     
