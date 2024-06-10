@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'thiruaws2lab/maven-thiruaws2lab-docker-agent:v1'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/jenkins/tools:/var/lib/jenkins/tools' // mount Docker socket to access the host's Docker daemon
+      args '--user root -v /usr/bin:/usr/bin -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/jenkins/tools:/var/lib/jenkins/tools' // mount Docker socket to access the host's Docker daemon
     }
   }
   stages {
@@ -32,8 +32,8 @@ pipeline {
 
         stage("OWASP Dependency Check"){
             steps{
-                dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'DP'
-                //dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                dependencyCheck additionalArguments: ' -nvdApiKey=77fa6173-62b4-451e-88e9-0113e5d6c6c0 --scan ./ --format HTML ', odcInstallation: 'DP'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
 
