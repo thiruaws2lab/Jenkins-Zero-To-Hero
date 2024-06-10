@@ -52,8 +52,7 @@ pipeline {
             def dockerImage = docker.image("${DOCKER_IMAGE}")
             dockerImage.push()
 
-          
-         
+      
         }
       }
     }
