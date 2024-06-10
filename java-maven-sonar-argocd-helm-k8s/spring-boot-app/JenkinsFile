@@ -1,4 +1,3 @@
-import org.jenkinsci.plugins.docker.commons.credentials.DockerRegistryToken
 pipeline {
   agent {
     docker {
@@ -31,6 +30,9 @@ pipeline {
       }
     }
     stage('Build /Push image') {
+      {
+        withDockerRegistry([ credentialsId: "docker-cred", url: "" ])
+        }
       environment {
         DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
