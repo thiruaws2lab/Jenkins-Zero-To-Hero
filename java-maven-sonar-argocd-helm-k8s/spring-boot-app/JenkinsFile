@@ -53,10 +53,7 @@ pipeline {
             dockerImage.inside("--entrypoint=''") {
                 sh 'echo "Hello from inside the container"'
             }
-            withdockerRegistry([credentialsId: 'docker-cred', url: '']) {
-                dockerImage.push()
-            }
-            dockerImage.push()
+           dockerImage.push()
 
           
          
