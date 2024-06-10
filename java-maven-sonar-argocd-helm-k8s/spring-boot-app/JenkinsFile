@@ -3,7 +3,7 @@ pipeline {
     maven 'mvn'
     jdk 'jdk'
     ant 'ant'
- dependency-check 'DP'
+ dependency-check}
 
   }
   agent {
