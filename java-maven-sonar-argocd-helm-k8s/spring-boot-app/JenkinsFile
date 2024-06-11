@@ -82,7 +82,7 @@ pipeline {
         //DOCKER_REGISTRY_URL = "https://index.docker.io/v1/"
       }
       steps {
-      snykSecurity  ( snykInstallation: 'synk', snykTokenId: 'synk-api', targetFile:'/var/lib/jenkins/workspace/demo1/java-maven-sonar-argocd-helm-k8s/spring-boot-app/pom.xml' )
+      snykSecurity  ( snykInstallation: 'synk', snykTokenId: 'synk-api', severity: 'critical', targetFile:'/var/lib/jenkins/workspace/demo1/java-maven-sonar-argocd-helm-k8s/spring-boot-app/pom.xml' )
       }
     }
 
