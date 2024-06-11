@@ -84,12 +84,7 @@ pipeline {
       snykSecurity  ( snykInstallation: 'synk', snykTokenId: 'synk-api'  )
       steps {
 
-        Echo "Starting Trivy scan for Docker image"
 
-script {
-            sh 'echo "Scanning the Docker image for vulnerabilities"'
-            sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/trivy:/usr/bin/trivy aquasec/trivy ${DOCKER_IMAGE}'
-        }
       }
     }
 
@@ -107,7 +102,12 @@ script {
                 sh 'echo $trivy'
                 sh 'echo $PATH'
                 sh 'trivy --version'
-                sh '/usr/bin/trivy image ${DOCKER_IMAGE}'
+                //sh '/usr/bin/trivy image ${DOCKER_IMAGE}'
+
+                script {
+            sh 'echo "Scanning the Docker image for vulnerabilities"'
+            sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/trivy:/usr/bin/trivy aquasec/trivy ${DOCKER_IMAGE}'
+        }
 
             }
         }
