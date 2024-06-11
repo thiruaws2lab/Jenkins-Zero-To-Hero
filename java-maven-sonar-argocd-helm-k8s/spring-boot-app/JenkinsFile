@@ -82,13 +82,10 @@ pipeline {
         //DOCKER_REGISTRY_URL = "https://index.docker.io/v1/"
       }
       steps {
-          echo 'Testing...'
-        snykSecurity(
-          snykInstallation: 'synk',
-          snykTokenId: 'synk-api',
-          // place other parameters here
-        )
-//snykSecurity  failOnError: false, organisation: 'thiruaws2lab', projectName: 'thiruaws2lab/ultimate-cicd', snykInstallation: 'synk', snykTokenId: 'synk-api'  }
+        
+        //snykSecurity( snykInstallation: 'synk', snykTokenId: 'synk-api', failOnError: false, organisation: 'thiruaws2lab', projectName: 'thiruaws2lab/ultimate-cicd', targetFile: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app/pom.xml')
+
+snykSecurity  failOnError: false, organisation: 'thiruaws2lab', projectName: 'thiruaws2lab/ultimate-cicd', snykInstallation: 'synk', snykTokenId: 'synk-api', targetFile: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app/pom.xml }
     }
 
            stage("TRIVY"){
@@ -132,4 +129,4 @@ pipeline {
             }
         }
     }
-  }}}
+  }}
