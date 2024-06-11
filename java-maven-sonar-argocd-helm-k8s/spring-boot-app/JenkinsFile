@@ -81,10 +81,8 @@ pipeline {
         REGISTRY_CREDENTIALS = credentials('docker-cred')
         //DOCKER_REGISTRY_URL = "https://index.docker.io/v1/"
       }
-      snykSecurity  ( snykInstallation: 'synk', snykTokenId: 'synk-api'  )
       steps {
-
-
+      snykSecurity  ( snykInstallation: 'synk', snykTokenId: 'synk-api'  )
       }
     }
 
