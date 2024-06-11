@@ -100,7 +100,7 @@ pipeline {
                 sh 'echo $trivy'
                 sh 'echo $PATH'
                 sh 'trivy --version'
-                sh '/usr/bin/trivy image ${DOCKER_IMAGE}' --format template --template "@contrib/html.tpl" -o report.html
+                sh '/usr/bin/trivy image --format template --template "@contrib/html.tpl" -o report.html  ${DOCKER_IMAGE}'
 
      
 
