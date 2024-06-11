@@ -75,7 +75,7 @@ pipeline {
       steps {
         echo 'Testing...'
         snykSecurity(
-          snykInstallation: 'synk,
+          snykInstallation: 'synk',
           snykTokenId: 'synk-api',
           // place other parameters here
         )
@@ -135,4 +135,4 @@ pipeline {
             }
         }
     }
-  }}
+  }}}
