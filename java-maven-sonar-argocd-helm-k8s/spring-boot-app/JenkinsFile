@@ -72,7 +72,7 @@ pipeline {
     }
 
 
-     stage('Scan') {
+     stage('Synk Scan') {
                         environment {
         
         DOCKER_IMAGE = "thiruaws2lab/ultimate-cicd:latest"
@@ -136,3 +136,4 @@ script {
     }
   }
 }
+
