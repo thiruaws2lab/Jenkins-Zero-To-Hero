@@ -82,9 +82,13 @@ pipeline {
         //DOCKER_REGISTRY_URL = "https://index.docker.io/v1/"
       }
       steps {
-        
+snykSecurity  failOnError: false, organisation: 'thiruaws2lab', projectName: 'thiruaws2lab/ultimate-cicd', snykInstallation: 'synk', snykTokenId: 'synk-api' targetFile: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app/pom.xml'  
 
-snykSecurity  (failOnError: false, organisation: 'thiruaws2lab', projectName: 'thiruaws2lab/ultimate-cicd', snykInstallation: 'synk', snykTokenId: 'synk-api', targetFile: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app/pom.xml' )
+script {
+            sh 'echo "Scanning the Docker image for vulnerabilities"'
+            sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/trivy:/usr/bin/trivy aquasec/trivy ${DOCKER_IMAGE}'
+        }
+      }
     }
 
            stage("TRIVY"){
@@ -128,4 +132,4 @@ snykSecurity  (failOnError: false, organisation: 'thiruaws2lab', projectName: 't
             }
         }
     }
-  }}}
+  }}
