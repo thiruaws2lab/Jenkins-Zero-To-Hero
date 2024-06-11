@@ -100,12 +100,9 @@ pipeline {
                 sh 'echo $trivy'
                 sh 'echo $PATH'
                 sh 'trivy --version'
-                //sh '/usr/bin/trivy image ${DOCKER_IMAGE}'
+                sh '/usr/bin/trivy image ${DOCKER_IMAGE}' --format template --template "@contrib/html.tpl" -o report.html
 
-                script {
-            sh 'echo "Scanning the Docker image for vulnerabilities"'
-            sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/trivy:/usr/bin/trivy aquasec/trivy ${DOCKER_IMAGE}'
-        }
+     
 
             }
         }
