@@ -84,8 +84,8 @@ pipeline {
       steps {
         
         //snykSecurity( snykInstallation: 'synk', snykTokenId: 'synk-api', failOnError: false, organisation: 'thiruaws2lab', projectName: 'thiruaws2lab/ultimate-cicd', targetFile: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app/pom.xml')
-
-snykSecurity  failOnError: false, organisation: 'thiruaws2lab', projectName: 'thiruaws2lab/ultimate-cicd', snykInstallation: 'synk', snykTokenId: 'synk-api', targetFile: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app/pom.xml }
+snykSecurity( snykInstallation: 'synk', snykTokenId: 'synk-api')
+//snykSecurity { failOnError: false, organisation: 'thiruaws2lab', projectName: 'thiruaws2lab/ultimate-cicd', snykInstallation: 'synk', snykTokenId: 'synk-api', targetFile: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app/pom.xml' }
     }
 
            stage("TRIVY"){
