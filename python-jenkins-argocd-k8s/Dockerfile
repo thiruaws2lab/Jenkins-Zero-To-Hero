@@ -1,4 +1,4 @@
-FROM python:slim
+FROM python:slim-bullseye
 RUN pip install django==3.2
 
 COPY . .
