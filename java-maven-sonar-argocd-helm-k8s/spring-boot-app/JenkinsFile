@@ -71,7 +71,16 @@ pipeline {
       }
     }
 
-
+    stage(' Synk Scan / Test') {
+      steps {
+        echo 'Testing...'
+        snykSecurity(
+          snykInstallation: 'synk@latest',
+          snykTokenId: 'synk-api',
+          // place other parameters here
+        )
+      }
+    }
      stage('Scan') {
                         environment {
         
@@ -82,7 +91,7 @@ pipeline {
         //DOCKER_REGISTRY_URL = "https://index.docker.io/v1/"
       }
       steps {
-snykSecurity  failOnError: false, organisation: 'thiruaws2lab', projectName: 'thiruaws2lab/ultimate-cicd', snykInstallation: 'synk', snykTokenId: 'synk-api'  }
+//snykSecurity  failOnError: false, organisation: 'thiruaws2lab', projectName: 'thiruaws2lab/ultimate-cicd', snykInstallation: 'synk', snykTokenId: 'synk-api'  }
     }
 
            stage("TRIVY"){
