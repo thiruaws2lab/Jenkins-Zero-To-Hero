@@ -17,7 +17,7 @@
     <version>1.0</version>
 
     <name>spring-boot-demo</name>
-    <url></url>
+    <url/>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -59,7 +59,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            <version>2.5.15</version>
+            <version>3.2.5</version>
             <optional>true</optional>
         </dependency>
 
