@@ -17,7 +17,7 @@
     <version>1.0</version>
 
     <name>spring-boot-demo</name>
-    <url></url>
+    <url/>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -36,7 +36,7 @@
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-beans</artifactId>
-    <version>6.1.8</version>
+    <version>6.1.9</version>
          </dependency>
          <dependency>
     <groupId>org.thymeleaf</groupId>
